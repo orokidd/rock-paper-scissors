@@ -56,11 +56,11 @@ function playRound(humanChoice, computerChoice) {
     }
   }
 
-  showRoundWinner(winner, player, computer);
+  updateRoundWinner(winner, player, computer);
   calculateGamePoints(winner);
 }
 
-function showRoundWinner(winner, humanChoice, computerChoice) {
+function updateRoundWinner(winner, humanChoice, computerChoice) {
   const roundWinner = document.querySelector(".round-result");
   switch (winner) {
     case "player":
@@ -93,7 +93,7 @@ function calculateGamePoints(roundWinner) {
 
   round++;
   updateRoundScore();
-  checkGameWinner();
+  updateGameWinner();
 }
 
 function updateRoundScore() {
@@ -101,7 +101,7 @@ function updateRoundScore() {
   score.textContent = `Score: Human = ${playerScore} Computer = ${computerScore}`;
 }
 
-function checkGameWinner() {
+function updateGameWinner() {
   const winner = document.querySelector(".winner");
   const humanWins = playerScore > computerScore;
   const tie = playerScore === computerScore;
