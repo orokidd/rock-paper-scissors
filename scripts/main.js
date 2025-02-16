@@ -4,7 +4,7 @@ const btnScissors = document.querySelector(".btn-scissors");
 
 let playerScore = 0;
 let computerScore = 0;
-let round = 0;
+let round = 1;
 
 function init() {
   btnRock.addEventListener("click", () =>
@@ -64,17 +64,17 @@ function updateRoundWinner(winner, humanChoice, computerChoice) {
   const roundWinner = document.querySelector(".round-result");
   switch (winner) {
     case "player":
-      roundWinner.textContent = `${winner} wins round ${round + 1}! 
+      roundWinner.textContent = `${winner} wins round ${round}! 
       ${humanChoice} beats ${computerChoice}`;
       break;
 
     case "computer":
-      roundWinner.textContent = `${winner} wins round ${round + 1}! 
+      roundWinner.textContent = `${winner} wins round ${round}! 
       ${computerChoice} beats ${humanChoice}`;
       break;
 
     case "tie":
-      roundWinner.textContent = `${winner} round ${round + 1}! 
+      roundWinner.textContent = `${winner} round ${round}! 
       both choices are ${humanChoice}`;
       break;
   }
