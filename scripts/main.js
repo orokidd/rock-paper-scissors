@@ -93,7 +93,7 @@ function calculateGamePoints(roundWinner) {
 
   round++;
   updateRoundScore();
-  updateGameWinner();
+  checkIfGameFinished();
 }
 
 function updateRoundScore() {
@@ -101,20 +101,28 @@ function updateRoundScore() {
   score.textContent = `Score: Human = ${playerScore} Computer = ${computerScore}`;
 }
 
+function checkIfGameFinished() {
+  const gameFinished = playerScore === 5 || computerScore === 5;
+  if (gameFinished) {
+    disableGameButton();
+    updateGameWinner();
+  }
+}
+
+function disableGameButton() {
+  [btnRock, btnPaper, btnScissors].forEach((button) => {
+    button.disabled = true;
+  });
+}
+
 function updateGameWinner() {
   const winner = document.querySelector(".winner");
   const humanWins = playerScore > computerScore;
 
-  if (playerScore === 5 || computerScore === 5) {
-    [btnRock, btnPaper, btnScissors].forEach((button) => {
-      button.disabled = true;
-    });
-
-    if (humanWins) {
-      winner.textContent = `You won the game!`;
-    } else {
-      winner.textContent = `You lost the game!`;
-    }
+  if (humanWins) {
+    winner.textContent = `You won the game!`;
+  } else {
+    winner.textContent = `You lost the game!`;
   }
 }
 
