@@ -104,17 +104,14 @@ function updateRoundScore() {
 function updateGameWinner() {
   const winner = document.querySelector(".winner");
   const humanWins = playerScore > computerScore;
-  const tie = playerScore === computerScore;
 
-  if (round === 5) {
+  if (playerScore === 5 || computerScore === 5) {
     [btnRock, btnPaper, btnScissors].forEach((button) => {
       button.disabled = true;
     });
 
     if (humanWins) {
       winner.textContent = `You won the game!`;
-    } else if (tie) {
-      winner.textContent = `The game ends in a tie!`;
     } else {
       winner.textContent = `You lost the game!`;
     }
