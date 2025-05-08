@@ -28,14 +28,14 @@ function getComputerChoice() {
 function playRound(humanChoice, computerChoice) {
   const player = humanChoice;
   const computer = computerChoice;
-  let winner = "player";
+  let winner = "Player";
 
   if (player === computer) winner = "tie";
 
   if (player === "rock") {
     switch (computer) {
       case "paper":
-        winner = "computer";
+        winner = "Computer";
         break;
     }
   }
@@ -43,7 +43,7 @@ function playRound(humanChoice, computerChoice) {
   if (player === "paper") {
     switch (computer) {
       case "scissors":
-        winner = "computer";
+        winner = "Computer";
         break;
     }
   }
@@ -51,7 +51,7 @@ function playRound(humanChoice, computerChoice) {
   if (player === "scissors") {
     switch (computer) {
       case "rock":
-        winner = "computer";
+        winner = "Computer";
         break;
     }
   }
@@ -62,31 +62,38 @@ function playRound(humanChoice, computerChoice) {
 
 function updateRoundWinner(winner, humanChoice, computerChoice) {
   const roundWinner = document.querySelector(".round-result");
+  const body = document.body;
+
+  // body.style.backgroundColor = "";
+
   switch (winner) {
-    case "player":
+    case "Player":
       roundWinner.textContent = `${winner} wins round ${round}! 
       ${humanChoice} beats ${computerChoice}`;
+      body.style.background = "#28a745";
       break;
 
-    case "computer":
+    case "Computer":
       roundWinner.textContent = `${winner} wins round ${round}! 
       ${computerChoice} beats ${humanChoice}`;
+      body.style.background = "#dc3545";
       break;
 
     case "tie":
-      roundWinner.textContent = `${winner} round ${round}! 
+      roundWinner.textContent = `Round ${round} is a ${winner}! 
       both choices are ${humanChoice}`;
+      body.style.background = "#6c757d";
       break;
   }
 }
 
 function calculateGamePoints(roundWinner) {
   switch (roundWinner) {
-    case "player":
+    case "Player":
       playerScore++;
       break;
 
-    case "computer":
+    case "Computer":
       computerScore++;
       break;
   }
