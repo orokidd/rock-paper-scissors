@@ -124,7 +124,7 @@ function updateRoundWinner(winner, humanChoice, computerChoice) {
       break;
 
     case "tie":
-      roundWinner.textContent = `Round ${round} is a ${winner}! 
+      roundWinner.textContent = `It's a ${winner}! 
       both choices are ${humanChoice}`;
       body.style.background = "#6c757d";
       break;
