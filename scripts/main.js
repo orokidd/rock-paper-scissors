@@ -65,22 +65,43 @@ function playRound(humanChoice) {
   checkIfGameFinished();
 
   updateSignState(player, computer);
-  updateDomSign()
+  updateDomSign();
 }
 
 function updateSignState(playerSign, computerSign) {
-  gameState.roundState.playerSign = playerSign
-  gameState.roundState.computerSign = computerSign
+  gameState.roundState.playerSign = playerSign;
+  gameState.roundState.computerSign = computerSign;
 }
 
 function updateDomSign() {
-  const domPlayerSign = document.querySelector(".player-sign")
-  const domComputerSign = document.querySelector(".computer-sign")
-  const playerSign = gameState.roundState.playerSign
-  const computerSign = gameState.roundState.computerSign
+  const domPlayerSign = document.querySelector(".player-sign");
+  const domComputerSign = document.querySelector(".computer-sign");
+  const playerSign = getPlayerSign();
+  const computerSign = getComputerSign();
 
-  domPlayerSign.textContent = playerSign
-  domComputerSign.textContent = computerSign
+  domPlayerSign.textContent = changeSignToIcons(playerSign);
+  domComputerSign.textContent = changeSignToIcons(computerSign);
+}
+
+function changeSignToIcons(selectedSign) {
+  switch (selectedSign) {
+    case "rock":
+      return "✊";
+
+    case "paper":
+      return "✋";
+
+    case "scissors":
+      return "✌️";
+  }
+}
+
+function getPlayerSign() {
+  return gameState.roundState.playerSign;
+}
+
+function getComputerSign() {
+  return gameState.roundState.computerSign;
 }
 
 function updateRoundWinner(winner, humanChoice, computerChoice) {
