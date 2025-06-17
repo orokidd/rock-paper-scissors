@@ -8,13 +8,13 @@ let round = 1;
 
 function init() {
   btnRock.addEventListener("click", () =>
-    playRound("rock", getComputerChoice())
+    playRound("rock")
   );
   btnPaper.addEventListener("click", () =>
-    playRound("paper", getComputerChoice())
+    playRound("paper")
   );
   btnScissors.addEventListener("click", () =>
-    playRound("scissors", getComputerChoice())
+    playRound("scissors")
   );
 }
 
@@ -25,9 +25,9 @@ function getComputerChoice() {
   if (choice === 2) return "scissors";
 }
 
-function playRound(humanChoice, computerChoice) {
+function playRound(humanChoice) {
   const player = humanChoice;
-  const computer = computerChoice;
+  const computer = getComputerChoice();
   let winner = "Player";
 
   if (player === computer) winner = "tie";
@@ -58,6 +58,8 @@ function playRound(humanChoice, computerChoice) {
 
   updateRoundWinner(winner, player, computer);
   calculateGamePoints(winner);
+  updateRoundScore();
+  checkIfGameFinished();
 }
 
 function updateRoundWinner(winner, humanChoice, computerChoice) {
@@ -68,13 +70,13 @@ function updateRoundWinner(winner, humanChoice, computerChoice) {
 
   switch (winner) {
     case "Player":
-      roundWinner.textContent = `${winner} wins round ${round}! 
+      roundWinner.textContent = `You won! 
       ${humanChoice} beats ${computerChoice}`;
       body.style.background = "#28a745";
       break;
 
     case "Computer":
-      roundWinner.textContent = `${winner} wins round ${round}! 
+      roundWinner.textContent = `You lost! 
       ${computerChoice} beats ${humanChoice}`;
       body.style.background = "#dc3545";
       break;
@@ -99,13 +101,13 @@ function calculateGamePoints(roundWinner) {
   }
 
   round++;
-  updateRoundScore();
-  checkIfGameFinished();
 }
 
 function updateRoundScore() {
-  const score = document.querySelector(".score");
-  score.textContent = `Score: Human = ${playerScore} Computer = ${computerScore}`;
+  const playerScoreDom = document.querySelector(".player-score");
+  const computerScoreDom = document.querySelector(".computer-score");
+  playerScoreDom.textContent = `Player: ${playerScore} `;
+  computerScoreDom.textContent = `Computer: ${computerScore} `;
 }
 
 function checkIfGameFinished() {
