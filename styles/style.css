@@ -61,3 +61,12 @@
     font-size: 1.2rem;
   }
   
+  .score-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .score-box {
+    width: 140px;
+  }

@@ -6,16 +6,19 @@ let playerScore = 0;
 let computerScore = 0;
 let round = 1;
 
+let gameState = {
+  playerScore: 0,
+  computerScore: 0,
+  roundState: {
+    playerSign: "",
+    computerSign: "",
+  },
+};
+
 function init() {
-  btnRock.addEventListener("click", () =>
-    playRound("rock")
-  );
-  btnPaper.addEventListener("click", () =>
-    playRound("paper")
-  );
-  btnScissors.addEventListener("click", () =>
-    playRound("scissors")
-  );
+  btnRock.addEventListener("click", () => playRound("rock"));
+  btnPaper.addEventListener("click", () => playRound("paper"));
+  btnScissors.addEventListener("click", () => playRound("scissors"));
 }
 
 function getComputerChoice() {
@@ -60,6 +63,24 @@ function playRound(humanChoice) {
   calculateGamePoints(winner);
   updateRoundScore();
   checkIfGameFinished();
+
+  updateSignState(player, computer);
+  updateDomSign()
+}
+
+function updateSignState(playerSign, computerSign) {
+  gameState.roundState.playerSign = playerSign
+  gameState.roundState.computerSign = computerSign
+}
+
+function updateDomSign() {
+  const domPlayerSign = document.querySelector(".player-sign")
+  const domComputerSign = document.querySelector(".computer-sign")
+  const playerSign = gameState.roundState.playerSign
+  const computerSign = gameState.roundState.computerSign
+
+  domPlayerSign.textContent = playerSign
+  domComputerSign.textContent = computerSign
 }
 
 function updateRoundWinner(winner, humanChoice, computerChoice) {
