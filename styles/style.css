@@ -18,7 +18,6 @@ body {
 }
 
 p {
-  margin-bottom: 20px;
   font-size: 1.5rem;
   text-align: center;
 }
@@ -32,6 +31,7 @@ button {
   font-size: 2.8rem;
   font-weight: bold;
   cursor: pointer;
+  /* box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); */
 }
 
 button:hover {
@@ -46,10 +46,16 @@ button:disabled {
 }
 
 .result-container {
-  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border-radius: 16px;
   min-width: 380px;
+  min-height: 400px;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.95);
+  /* box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); */
 }
 
 .buttons-container {
@@ -65,7 +71,6 @@ button:disabled {
 .round-result,
 .score,
 .winner {
-  margin-top: 10px;
   font-size: 1.2rem;
   color: black;
 }
@@ -77,8 +82,20 @@ button:disabled {
 }
 
 .score-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   margin: 12px;
   width: 140px;
   height: 160px;
-  background-color: #2193b0;
+  border-radius: 16px;
+  background-color: #ffffff;
+  color: rgb(48, 48, 48);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+}
+
+p.player-sign, p.computer-sign {
+  font-size: 3rem;
+  margin-bottom: 12px
 }

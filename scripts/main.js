@@ -144,8 +144,8 @@ function calculateGamePoints() {
 function updateRoundScore() {
   const playerScoreDom = document.querySelector(".player-score");
   const computerScoreDom = document.querySelector(".computer-score");
-  playerScoreDom.textContent = `Player: ${gameState.playerScore} `;
-  computerScoreDom.textContent = `Computer: ${gameState.computerScore} `;
+  playerScoreDom.textContent = `${gameState.playerScore} `;
+  computerScoreDom.textContent = `${gameState.computerScore} `;
 }
 
 function checkIfGameFinished() {
