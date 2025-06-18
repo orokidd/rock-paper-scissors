@@ -114,19 +114,19 @@ function updateRoundWinner(winner, humanChoice, computerChoice) {
     case "Player":
       roundWinner.textContent = `You won! 
       ${humanChoice} beats ${computerChoice}`;
-      body.style.background = "#28a745";
+      // body.style.background = "#28a745";
       break;
 
     case "Computer":
       roundWinner.textContent = `You lost! 
       ${computerChoice} beats ${humanChoice}`;
-      body.style.background = "#dc3545";
+      // body.style.background = "#dc3545";
       break;
 
     case "tie":
       roundWinner.textContent = `It's a ${winner}! 
       both choices are ${humanChoice}`;
-      body.style.background = "#6c757d";
+      // body.style.background = "#6c757d";
       break;
   }
 }
