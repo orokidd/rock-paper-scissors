@@ -2,16 +2,14 @@ const btnRock = document.querySelector(".btn-rock");
 const btnPaper = document.querySelector(".btn-paper");
 const btnScissors = document.querySelector(".btn-scissors");
 
-let playerScore = 0;
-let computerScore = 0;
-let round = 1;
-
 let gameState = {
   playerScore: 0,
   computerScore: 0,
+  round: 1,
   roundState: {
     playerSign: "",
     computerSign: "",
+    roundWinner: ""
   },
 };
 
@@ -31,14 +29,14 @@ function getComputerChoice() {
 function playRound(humanChoice) {
   const player = humanChoice;
   const computer = getComputerChoice();
-  let winner = "Player";
+  let winner = "player";
 
   if (player === computer) winner = "tie";
 
   if (player === "rock") {
     switch (computer) {
       case "paper":
-        winner = "Computer";
+        winner = "computer";
         break;
     }
   }
@@ -46,7 +44,7 @@ function playRound(humanChoice) {
   if (player === "paper") {
     switch (computer) {
       case "scissors":
-        winner = "Computer";
+        winner = "computer";
         break;
     }
   }
@@ -54,23 +52,23 @@ function playRound(humanChoice) {
   if (player === "scissors") {
     switch (computer) {
       case "rock":
-        winner = "Computer";
+        winner = "computer";
         break;
     }
   }
 
-  updateRoundWinner(winner, player, computer);
-  calculateGamePoints(winner);
+  updateRoundState(player, computer, winner);
+  updateRoundWinner();
+  calculateGamePoints();
   updateRoundScore();
   checkIfGameFinished();
-
-  updateSignState(player, computer);
   updateDomSign();
 }
 
-function updateSignState(playerSign, computerSign) {
+function updateRoundState(playerSign, computerSign, roundWinner) {
   gameState.roundState.playerSign = playerSign;
   gameState.roundState.computerSign = computerSign;
+  gameState.roundState.roundWinner = roundWinner;
 }
 
 function updateDomSign() {
@@ -104,20 +102,20 @@ function getComputerSign() {
   return gameState.roundState.computerSign;
 }
 
-function updateRoundWinner(winner, humanChoice, computerChoice) {
+function updateRoundWinner() {
   const roundWinner = document.querySelector(".round-result");
-  const body = document.body;
-
-  // body.style.backgroundColor = "";
+  const winner = gameState.roundState.roundWinner
+  const humanChoice = gameState.roundState.playerSign
+  const computerChoice = gameState.roundState.computerSign
 
   switch (winner) {
-    case "Player":
+    case "player":
       roundWinner.textContent = `You won! 
       ${humanChoice} beats ${computerChoice}`;
       // body.style.background = "#28a745";
       break;
 
-    case "Computer":
+    case "computer":
       roundWinner.textContent = `You lost! 
       ${computerChoice} beats ${humanChoice}`;
       // body.style.background = "#dc3545";
@@ -131,29 +129,30 @@ function updateRoundWinner(winner, humanChoice, computerChoice) {
   }
 }
 
-function calculateGamePoints(roundWinner) {
+function calculateGamePoints() {
+  const roundWinner = gameState.roundState.roundWinner
   switch (roundWinner) {
-    case "Player":
-      playerScore++;
+    case "player":
+      gameState.playerScore++;
       break;
 
-    case "Computer":
-      computerScore++;
+    case "computer":
+      gameState.computerScore++;
       break;
   }
 
-  round++;
+  gameState.round++;
 }
 
 function updateRoundScore() {
   const playerScoreDom = document.querySelector(".player-score");
   const computerScoreDom = document.querySelector(".computer-score");
-  playerScoreDom.textContent = `Player: ${playerScore} `;
-  computerScoreDom.textContent = `Computer: ${computerScore} `;
+  playerScoreDom.textContent = `Player: ${gameState.playerScore} `;
+  computerScoreDom.textContent = `Computer: ${gameState.computerScore} `;
 }
 
 function checkIfGameFinished() {
-  const gameFinished = playerScore === 5 || computerScore === 5;
+  const gameFinished = gameState.playerScore === 5 || gameState.computerScore === 5;
   if (gameFinished) {
     disableGameButton();
     updateGameWinner();
@@ -168,7 +167,7 @@ function disableGameButton() {
 
 function updateGameWinner() {
   const winner = document.querySelector(".winner");
-  const humanWins = playerScore > computerScore;
+  const humanWins = gameState.playerScore > gameState.computerScore;
 
   if (humanWins) {
     winner.textContent = `You won the game!`;
