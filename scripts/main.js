@@ -57,10 +57,8 @@ function playRound(humanChoice) {
   updateDomSign();
 }
 
-function updateRoundState(playerSign, computerSign, roundWinner) {
-  gameState.roundState.playerSign = playerSign;
-  gameState.roundState.computerSign = computerSign;
-  gameState.roundState.roundWinner = roundWinner;
+function updateRoundState(player, computer, winner) {
+  gameState.roundState = { playerSign: player, computerSign: computer, roundWinner: winner };
 }
 
 function updateDomSign() {
