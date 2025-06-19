@@ -51,7 +51,7 @@ function playRound(humanChoice) {
 
   updateRoundState(playerChoice, computerChoice, winner);
   updateRoundDisplay()
-  calculateGamePoints();
+  updateScore();
   updateRoundScore();
   checkIfGameFinished();
 }
@@ -88,12 +88,8 @@ function updateRoundDisplay() {
   }
 }
 
-function getRoundWinner() {
-  return gameState.roundState.roundWinner;
-}
-
-function calculateGamePoints() {
-  const roundWinner = getRoundWinner()
+function updateScore() {
+  const { roundWinner } = gameState.roundState;
   switch (roundWinner) {
     case "player":
       gameState.playerScore++;
@@ -103,7 +99,6 @@ function calculateGamePoints() {
       gameState.computerScore++;
       break;
   }
-
   gameState.round++;
 }
 
