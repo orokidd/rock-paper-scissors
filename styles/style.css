@@ -30,16 +30,17 @@ button {
   font-size: 2.8rem;
   font-weight: bold;
   cursor: pointer;
+  transition: all 0.2s ease;
   /* box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); */
 }
 
 button:hover {
-  background-color: #d6f0f6;
-  transform: scale(1.05);
+  /* background-color: #d6f0f6; */
+  transform: translateY(-4px) scale(1.05);
 }
 
 button:disabled {
-  background-color: #ccc;
+  opacity: 0.5;
   cursor: not-allowed;
   transform: none;
 }
@@ -54,7 +55,7 @@ button:disabled {
   min-width: 380px;
   min-height: 400px;
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.95);
   /* box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); */
 }
 
@@ -93,6 +94,11 @@ button:disabled {
   background-color: #ffffff;
   color: rgb(48, 48, 48);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease
+}
+
+.score-box:hover {
+  transform: translateY(-4px);
 }
 
 p.player-sign, p.computer-sign {
