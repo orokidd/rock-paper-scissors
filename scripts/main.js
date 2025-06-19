@@ -50,74 +50,46 @@ function playRound(humanChoice) {
   const winner = getWinner(playerChoice, computerChoice)
 
   updateRoundState(playerChoice, computerChoice, winner);
-  updateRoundWinner();
+  updateRoundDisplay()
   calculateGamePoints();
   updateRoundScore();
   checkIfGameFinished();
-  updateDomSign();
 }
 
 function updateRoundState(player, computer, winner) {
   gameState.roundState = { playerSign: player, computerSign: computer, roundWinner: winner };
 }
 
-function updateDomSign() {
-  const domPlayerSign = document.querySelector(".player-sign");
-  const domComputerSign = document.querySelector(".computer-sign");
-  const playerSign = getPlayerSign();
-  const computerSign = getComputerSign();
+function updateRoundDisplay() {
+  const playerSignElement = document.querySelector(".player-sign");
+  const computerSignElement = document.querySelector(".computer-sign");
+  const resultElement = document.querySelector(".round-result");
 
-  domPlayerSign.textContent = changeSignToIcons(playerSign);
-  domComputerSign.textContent = changeSignToIcons(computerSign);
-}
+  const { playerSign, computerSign, roundWinner } = gameState.roundState;
 
-function changeSignToIcons(selectedSign) {
-  switch (selectedSign) {
-    case "rock":
-      return "✊";
+  playerSignElement.textContent = signs[playerSign];
+  computerSignElement.textContent = signs[computerSign];
 
-    case "paper":
-      return "✋";
+  switch (roundWinner) {
+    case "player":
+      resultElement.textContent = `You won! 
+      ${playerSign} beats ${computerSign}`;
+      break;
 
-    case "scissors":
-      return "✌️";
+    case "computer":
+      resultElement.textContent = `You lost! 
+      ${computerSign} beats ${playerSign}`;
+      break;
+
+    case "tie":
+      resultElement.textContent = `It's a ${roundWinner}! 
+      both choices are ${playerSign}`;
+      break;
   }
-}
-
-function getPlayerSign() {
-  return gameState.roundState.playerSign;
-}
-
-function getComputerSign() {
-  return gameState.roundState.computerSign;
 }
 
 function getRoundWinner() {
   return gameState.roundState.roundWinner;
-}
-
-function updateRoundWinner() {
-  const roundWinner = document.querySelector(".round-result");
-  const winner = getRoundWinner()
-  const playerChoice = getPlayerSign()
-  const computerChoice = getComputerSign()
-
-  switch (winner) {
-    case "player":
-      roundWinner.textContent = `You won! 
-      ${playerChoice} beats ${computerChoice}`;
-      break;
-
-    case "computer":
-      roundWinner.textContent = `You lost! 
-      ${computerChoice} beats ${playerChoice}`;
-      break;
-
-    case "tie":
-      roundWinner.textContent = `It's a ${winner}! 
-      both choices are ${playerChoice}`;
-      break;
-  }
 }
 
 function calculateGamePoints() {
