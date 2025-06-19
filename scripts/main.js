@@ -52,8 +52,8 @@ function playRound(humanChoice) {
   updateRoundState(playerChoice, computerChoice, winner);
   updateRoundDisplay()
   updateScore();
-  updateRoundScore();
-  checkIfGameFinished();
+  updateScoreDisplay();
+  checkGameFinished();
 }
 
 function updateRoundState(player, computer, winner) {
@@ -102,18 +102,18 @@ function updateScore() {
   gameState.round++;
 }
 
-function updateRoundScore() {
-  const playerScoreDom = document.querySelector(".player-score");
-  const computerScoreDom = document.querySelector(".computer-score");
-  playerScoreDom.textContent = `${gameState.playerScore} `;
-  computerScoreDom.textContent = `${gameState.computerScore} `;
+function updateScoreDisplay() {
+  const playerScoreElement = document.querySelector(".player-score");
+  const computerScoreElement = document.querySelector(".computer-score");
+  playerScoreElement.textContent = `${gameState.playerScore} `;
+  computerScoreElement.textContent = `${gameState.computerScore} `;
 }
 
-function checkIfGameFinished() {
+function checkGameFinished() {
   const gameFinished = gameState.playerScore === 5 || gameState.computerScore === 5;
   if (gameFinished) {
     disableGameButton();
-    updateGameWinner();
+    showGameWinner();
   }
 }
 
@@ -123,15 +123,11 @@ function disableGameButton() {
   });
 }
 
-function updateGameWinner() {
-  const winner = document.querySelector(".winner");
-  const humanWins = gameState.playerScore > gameState.computerScore;
+function showGameWinner() {
+  const winnerElement = document.querySelector(".winner");
+  const { playerScore, computerScore } = gameState;
 
-  if (humanWins) {
-    winner.textContent = `You won the game!`;
-  } else {
-    winner.textContent = `You lost the game!`;
-  }
+  winnerElement.textContent = playerScore > computerScore ? "You won the game!" : "You lost the game!";
 }
 
 init();
