@@ -49,7 +49,8 @@ button:disabled {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 20px;
+  align-items: center;
+  gap: 40px;
 
   border-radius: 16px;
   min-width: 380px;
@@ -69,11 +70,17 @@ button:disabled {
   margin-top: 24px;
 }
 
-.round-result,
-.score,
+.round-result {
+  font-size: 1.4em;
+  font-weight: 600;
+  color: #4a5568;
+  /* min-height: 60px; */
+  line-height: 1.4;
+}
+
 .winner {
   font-size: 1.2rem;
-  color: black;
+  color: rgb(28, 28, 28);
 }
 
 .score-container {
@@ -104,4 +111,21 @@ button:disabled {
 p.player-sign, p.computer-sign {
   font-size: 3rem;
   margin-bottom: 12px
+}
+
+@media (max-width: 400px) {
+  .result-container {
+    min-width: auto;
+  }
+  
+  .buttons-container {
+    gap: 15px;
+  }
+  
+  .btn-rock,
+  .btn-paper,
+  .btn-scissors {
+    font-size: 2.5em;
+    padding: 15px;
+  }
 }
